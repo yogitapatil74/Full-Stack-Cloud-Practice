@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Intelligence Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="glass-container">
+        <header>
+            <i class="fa-solid fa-cloud-bolt logo"></i>
+            <h1>CloudNode <span class="badge">v1.0</span></h1>
+            <p class="subtitle">Real-time Instance Monitoring</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="label"><i class="fa-solid fa-circle-check"></i> System Status</span>
+                <span class="value status-online">Operational</span>
+            </div>
+            <div class="stat-item">
+                <span class="label"><i class="fa-solid fa-server"></i> Environment</span>
+                <span class="value">{{ info.location }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="label"><i class="fa-solid fa-microchip"></i> OS Architecture</span>
+                <span class="value">{{ info.os }} {{ info.release }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="label"><i class="fa-solid fa-clock"></i> Server Time</span>
+                <span class="value">{{ info.time }}</span>
+            </div>
+        </div>
+
+        <footer>
+            <button class="btn-primary" onclick="location.reload()">
+                <i class="fa-solid fa-arrows-rotate"></i> Refresh Metrics
+            </button>
+        </footer>
+    </div>
+</body>
+</html>
