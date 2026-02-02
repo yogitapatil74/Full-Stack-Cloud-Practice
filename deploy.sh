@@ -1,13 +1,21 @@
 #!/bin/bash
-echo "Initializing Deployment..."
-# Update system
+
+echo "Starting Deployment Pipeline..."
+
+# 1. Update system packages
 sudo apt update -y
-# Install Python environment
-sudo apt install python3-pip python3-venv -y
-# Setup virtual environment
-python3 -m venv venv
-source venv/bin/activate
-# Install Flask
-pip install flask
+
+# 2. Install Python and Pip
+sudo apt install python3-pip -y
+
+# 3. Install Flask (The core framework for our Full Stack app)
+pip3 install flask
+
+# 4. Kill any old versions of the app running on port 5000 (Prevents errors)
+fuser -k 5000/tcp || true
+
+# 5. Run the application in the background
 nohup python3 app.py > output.log 2>&1 &
-echo "Application is now running on port 5000."
+
+echo "Deployment Successful! The Elegant Dashboard is live on port 5000."
+echo "Check your EC2 Public IP to see the result."
